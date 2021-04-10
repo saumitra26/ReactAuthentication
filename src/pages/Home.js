@@ -1,9 +1,10 @@
 import React from 'react'
-
-const Home = () => {
+import {useState,useEffect} from 'react'
+const Home = (props) => {
+    
     return (
         <div>
-            home
+           {props.name?'Hi'+props.name: 'You are not logged in'}
         </div>
     )
 }

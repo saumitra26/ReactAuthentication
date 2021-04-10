@@ -1,14 +1,15 @@
 import React from 'react'
 import {useState} from 'react'
+import { Redirect } from 'react-router';
 
 
 const Login = () => {
     const [signum,setSignum]=useState('');
     const [password,setPassword]=useState('');
+    const [redirect,setRedirect]=useState(false);
     const submit=async(e)=>{
         e.preventDefault();
-        await fetch('http://localhost:5000/api/auth/login/',{
-            mode: 'cores',
+        await fetch('http://localhost:5000/api/auth/login',{
             method:'POST',
             credentials:'include',
             headers: ({
@@ -18,9 +19,11 @@ const Login = () => {
                 Password: password
               })
         });
-       
+        setRedirect(true);
     }
-
+    if(redirect){
+      return  <Redirect to="/Home"/>
+     }
     return (
         <form onSubmit={submit}>
           <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
